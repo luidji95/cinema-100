@@ -6,7 +6,7 @@ export async function fetchMovies() {
   if (error) {
     console.error("Error fetching movies:", error);
   } else {
-    console.log("Fetched movies:", data); // Trebalo bi da vidimo filmove
+    console.log("Fetched movies:", data);
   }
 
   return data || [];

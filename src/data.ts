@@ -1,4 +1,4 @@
-import { singleMovie } from "./types";
+import { singleMovie } from "./types/movie";
 
 export const data: singleMovie[] = [
   {
@@ -22,6 +22,7 @@ export const data: singleMovie[] = [
     ],
     imdbid: "tt0111161",
   },
+
   {
     rank: 2,
     title: "The Godfather",

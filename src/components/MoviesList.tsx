@@ -1,24 +1,20 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { fetchMovies } from "../services/movies";
-
-type Movie = {
-  id: number;
-  title: string;
-  director: string;
-  release_year: number;
-};
+import { singleMovie } from "../types/movie";
 
 const MoviesList = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const {
+    data: movies = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery<singleMovie[]>({
+    queryKey: ["movies"],
+    queryFn: fetchMovies,
+  });
 
-  useEffect(() => {
-    const getMovies = async () => {
-      const moviesData = await fetchMovies();
-      setMovies(moviesData);
-    };
-
-    getMovies();
-  }, []);
+  if (isLoading) return <p>Loading movies...</p>;
+  if (isError) return <p>Error fetching movies: {error.message}</p>;
 
   return (
     <div>
@@ -30,7 +26,7 @@ const MoviesList = () => {
           {movies.map((movie) => (
             <li key={movie.id}>
               <strong>{movie.title}</strong> - {movie.director} (
-              {movie.release_year})
+              {movie.releaseYear})
             </li>
           ))}
         </ul>

@@ -1,7 +1,15 @@
 import { createClient } from "@supabase/supabase-js";
 
-const SUPABASE_URL = "https://mlydjyhqtdqobvsvevln.supabase.co";
-const SUPABASE_ANON_KEY =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1seWRqeWhxdGRxb2J2c3ZldmxuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDIwNzMwODAsImV4cCI6MjA1NzY0OTA4MH0.f7KTskm0vp63EgJYWZPxYFtoeDGzDdbxiJlg-n4lB38";
+// Proveravamo da li radimo u Vite okruženju ili u Node.js
+const SUPABASE_URL =
+  typeof import.meta !== "undefined"
+    ? import.meta.env.VITE_SUPABASE_URL
+    : process.env.VITE_SUPABASE_URL;
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const SUPABASE_ANON_KEY =
+  typeof import.meta !== "undefined"
+    ? import.meta.env.VITE_SUPABASE_ANON_KEY
+    : process.env.VITE_SUPABASE_ANON_KEY;
+
+// Kreiramo Supabase klijent
+export const supabase = createClient(SUPABASE_URL!, SUPABASE_ANON_KEY!);
