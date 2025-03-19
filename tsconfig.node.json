@@ -8,5 +8,5 @@
     "rootDir": ".",
     "skipLibCheck": true
   },
-  "include": ["uploadMovies.ts", "src/data.ts", "src/types.ts"]
+  "include": ["seedMovies.ts", "src/data.ts", "src/types.ts"]
 }

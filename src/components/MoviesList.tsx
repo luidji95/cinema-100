@@ -1,6 +1,8 @@
+import React, { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMovies } from "../services/movies";
 import { singleMovie } from "../types/movie";
+import { uploadMovies } from "../services/uploadMovies";
 
 const MoviesList = () => {
   const {
@@ -12,6 +14,10 @@ const MoviesList = () => {
     queryKey: ["movies"],
     queryFn: fetchMovies,
   });
+
+  useEffect(() => {
+    uploadMovies();
+  }, []);
 
   if (isLoading) return <p>Loading movies...</p>;
   if (isError) return <p>Error fetching movies: {error.message}</p>;
@@ -25,8 +31,7 @@ const MoviesList = () => {
         <ul>
           {movies.map((movie) => (
             <li key={movie.id}>
-              <strong>{movie.title}</strong> - {movie.director} (
-              {movie.releaseYear})
+              <strong>{movie.title}</strong> - {movie.director} ({movie.year})
             </li>
           ))}
         </ul>
